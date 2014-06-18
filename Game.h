@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _GAME_H__
+#define _GAME_H__
+
 #include "SFML/Window.hpp"
 #include "SFML/Graphics.hpp"
 
@@ -18,3 +20,5 @@ class Game
 	static GameState _gameState;
 	static sf::RenderWindow _mainWindow;
 };
+
+#endif
