@@ -1,0 +1,1 @@
+Creating the game "Pang" to learn SFML and brush up on my OOP.
