@@ -1,10 +1,15 @@
 #include "stdafx.h"
 #include "Game.h"
 
+Game::GameState Game::_gameState = Unitialized;
+sf::RenderWindow Game::_mainWindow;
+
 void Game::Start()
 {
-    if (_gameState != Unitialized) return;
-
+    if (_gameState != Unitialized){ 
+    	cerr << "Error: game already in session" << endl;
+    	return;
+    }
     _mainWindow.Create(sf::VideoMode(1024, 768, 32), "Pang!");
     _gameState = Game::Playing;
 
@@ -44,6 +49,3 @@ void Game::GameLoop()
 		}
 	}
 }
-
-Game::GameState Game::_gameState = Unitialized;
-sf::RenderWindow Game::_mainWindow;
