@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Game.h"
 
-int main(int argc, char** argv[])
+int main(int argc, char** argv)
 {
 	Game::Start();
 

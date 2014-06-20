@@ -1,31 +1,32 @@
 #include "stdafx.h"
 #include "splashScreen.h"
+using namespace std;
 
 void SplashScreen::Show(sf::RenderWindow &renderWindow)
 {
-    sf::Image image;
-    if (image.LoadFromFile("images/pangTitle.jpg") ! = true)
+    sf::Texture texture;
+    if (!texture.loadFromFile("images/pangTitle.jpg"))
     {
         cerr << "Error: title image not found" << endl;
         return;
     }
 
-    sf::Sprite sprite(image);
+    sf::Sprite sprite(texture);
 
-    renderWindow.Draw(sprite);
-    renderWindow.Display();
+    renderWindow.draw(sprite);
+    renderWindow.display();
 
     sf::Event event;
-    while(true)
+    while (true)
     {
-    	while(renderWindow.GetEvent(event))
-    	{
-    		if(event.Type == sf::Event::EventType::KeyPressed
-    			|| event.Type == sf::Event::EventType::MouseButtonPressed
-    			|| event.Type == sf::Event::EventType::Closed)
-    		{
-    			return;
-    		}
-    	}
+        while (renderWindow.pollEvent(event))
+        {
+            if (event.type == sf::Event::KeyPressed
+                    || event.type == sf::Event::MouseButtonPressed
+                    || event.type == sf::Event::Closed)
+            {
+                return;
+            }
+        }
     }
 }
