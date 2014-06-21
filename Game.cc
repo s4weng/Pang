@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #include "Game.h"
+#include "MainMenu.h"
+#include "splashScreen.h"
 using namespace std;
 
 Game::GameState Game::_gameState = Uninitialized;
@@ -7,12 +9,13 @@ sf::RenderWindow Game::_mainWindow;
 
 void Game::Start()
 {
-    if (_gameState != Uninitialized){ 
-    	cerr << "Error: game already in session" << endl;
-    	return;
+    if (_gameState != Uninitialized)
+    {
+        cerr << "Error: game already in session" << endl;
+        return;
     }
-    _mainWindow.create(sf::VideoMode(1024, 768, 32), "Pang!");
-    _gameState = Game::Playing;
+    _mainWindow.create(sf::VideoMode(1024, 768), "Pang!");
+    _gameState = Game::ShowingSplash;
 
     while (!isExiting())
     {
@@ -30,24 +33,65 @@ bool Game::isExiting()
 
 void Game::GameLoop()
 {
-	sf::Event currentEvent;
-	while (_mainWindow.pollEvent(currentEvent))
-	{
+    sf::Event currentEvent;
+    while (_mainWindow.pollEvent(currentEvent))
+    {
+        switch (_gameState)
+        {
+        case Game::ShowingMenu:
+        {
+            ShowMenu();
+            break;
+        }
+        case Game::ShowingSplash:
+        {
+            ShowSplashScreen();
+            break;
+        }
 
-		switch(_gameState)
-		{
-			case Game::Playing:
-			{
-				_mainWindow.clear(sf::Color(255, 0, 0));
-				_mainWindow.display();
+        case Game::Playing:
+        {
+            sf::Event currentEvent;
+            while (_mainWindow.pollEvent(currentEvent))
+            {
+                _mainWindow.clear(sf::Color(255, 0, 0));
+                _mainWindow.display();
 
-				if(currentEvent.type == sf::Event::Closed)
-				{
-					_gameState = Game::Exiting;
-				}
-				break;
-			}
-		}
-	}
+                if (currentEvent.type == sf::Event::Closed)
+                {
+                    _gameState = Game::Exiting;
+                }
+
+                if (currentEvent.type == sf::Event::KeyPressed)
+                {
+                    if (currentEvent.key.code == sf::Keyboard::Escape) ShowMenu();
+                }
+            }
+            break;
+        }
+        }
+    }
 }
 
+
+void Game::ShowSplashScreen()
+{
+    SplashScreen splashScreen;
+    splashScreen.Show(_mainWindow);
+    _gameState = Game::ShowingMenu;
+}
+
+void Game::ShowMenu()
+{
+    MainMenu mainMenu;
+    MainMenu::MenuResult result = mainMenu.Show(_mainWindow);
+    switch (result)
+    {
+    case MainMenu::Exit:
+        _gameState = Game::Exiting;
+        break;
+    case MainMenu::Play:
+        _gameState = Game::Playing;
+        break;
+    }
+}

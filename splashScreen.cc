@@ -5,7 +5,7 @@ using namespace std;
 void SplashScreen::Show(sf::RenderWindow &renderWindow)
 {
     sf::Texture texture;
-    if (!texture.loadFromFile("images/pangTitle.jpg"))
+    if (!texture.loadFromFile("images/pangTitle.png"))
     {
         cerr << "Error: title image not found" << endl;
         return;
@@ -13,20 +13,16 @@ void SplashScreen::Show(sf::RenderWindow &renderWindow)
 
     sf::Sprite sprite(texture);
 
-    renderWindow.draw(sprite);
-    renderWindow.display();
-
     sf::Event event;
-    while (true)
+    while (renderWindow.isOpen())
     {
         while (renderWindow.pollEvent(event))
         {
-            if (event.type == sf::Event::KeyPressed
-                    || event.type == sf::Event::MouseButtonPressed
-                    || event.type == sf::Event::Closed)
-            {
-                return;
-            }
+            if (event.type == sf::Event::Closed) renderWindow.close();
+            if (event.type == sf::Event::KeyPressed) return;
         }
+        renderWindow.clear();
+        renderWindow.draw(sprite);
+        renderWindow.display();
     }
 }

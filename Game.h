@@ -14,7 +14,10 @@ class Game
 	static bool isExiting();
 	static void GameLoop();
 
-	enum GameState { Uninitialized, ShowSplash, Paused, ShowingMenu,
+	static void ShowSplashScreen();
+	static void ShowMenu();
+
+	enum GameState { Uninitialized, ShowingSplash, Paused, ShowingMenu,
 	Playing, Exiting };
 
 	static GameState _gameState;
