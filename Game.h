@@ -3,6 +3,7 @@
 
 #include "SFML/Window.hpp"
 #include "SFML/Graphics.hpp"
+#include "PlayerPaddle.h"
 
 class Game
 {
@@ -22,6 +23,7 @@ class Game
 
 	static GameState _gameState;
 	static sf::RenderWindow _mainWindow;
+	static PlayerPaddle _player1;
 };
 
 #endif

@@ -6,6 +6,7 @@ using namespace std;
 
 Game::GameState Game::_gameState = Uninitialized;
 sf::RenderWindow Game::_mainWindow;
+PlayerPaddle Game::_player1;
 
 void Game::Start()
 {
@@ -15,6 +16,10 @@ void Game::Start()
         return;
     }
     _mainWindow.create(sf::VideoMode(1024, 768), "Pang!");
+    
+    _player1.Load("images/paddle.png");
+    _player1.SetPosition((1024/2)-45,700);
+
     _gameState = Game::ShowingSplash;
 
     while (!isExiting())
@@ -55,6 +60,7 @@ void Game::GameLoop()
             while (_mainWindow.pollEvent(currentEvent))
             {
                 _mainWindow.clear(sf::Color(255, 0, 0));
+                _player1.Draw(_mainWindow);
                 _mainWindow.display();
 
                 if (currentEvent.type == sf::Event::Closed)
