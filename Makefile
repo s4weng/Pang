@@ -1,6 +1,6 @@
 CXX = g++
 CXXFLAGS = -Wall -MMD
-OBJECTS = pang.o Game.o MainMenu.o splashScreen.o stdafx.o VisibleGameObject.o PlayerPaddle.o GameObjectManager.o
+OBJECTS = pang.o Game.o MainMenu.o GameBall.o splashScreen.o stdafx.o VisibleGameObject.o PlayerPaddle.o GameObjectManager.o
 DEPENDS = ${OBJECTS:.o=.d}
 EXEC = pang
 LIBS=-lsfml-graphics -lsfml-window -lsfml-system

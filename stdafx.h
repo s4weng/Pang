@@ -10,6 +10,7 @@
 #include <SFML/Audio.hpp>
 
 #include <map>
+#include <cassert>
 #include <list>
 #include <iostream>
 #include <cassert>
