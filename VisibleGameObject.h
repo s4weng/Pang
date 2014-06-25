@@ -12,8 +12,12 @@ public:
     virtual void Update(float elapsedTime);
 
     virtual void SetPosition(float x, float y);
-    virtual sf::Vector2f GetPosition() const;
     virtual bool IsLoaded() const;
+    virtual float GetWidth() const;
+    virtual float GetHeight() const;
+
+    virtual sf::Vector2f GetPosition() const;
+    virtual sf::Rect<float> GetBoundingRect() const;
 
 protected:
     sf::Sprite& GetSprite();

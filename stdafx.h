@@ -14,5 +14,6 @@
 #include <list>
 #include <iostream>
 #include <cassert>
+#include <math.h>
 
 #endif
